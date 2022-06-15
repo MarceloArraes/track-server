@@ -1,4 +1,4 @@
-import { StyleSheet, View} from 'react-native'
+import { StyleSheet, View, TouchableOpacity} from 'react-native'
 import React, {useState, useContext} from 'react'
 import {Text, Input, Button} from '@rneui/base'
 import Spacer from '../components/Spacer'
@@ -8,6 +8,7 @@ const SignupScreen = ({navigation}) => {
   const {state, signup} = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
 
   return (
     <View style={styles.mainView}>
@@ -16,13 +17,14 @@ const SignupScreen = ({navigation}) => {
      </Spacer>
       <Spacer>
       <Input autoCorrect={false} autoCapitalize='none' placeholder="Email" value={email} onChangeText={setEmail} />
-      </Spacer>
-      <Spacer>
       <Input secureTextEntry autoCorrect={false} autoCapitalize='none' placeholder="Password" value={password} onChangeText={setPassword}/>
+      <Input secureTextEntry autoCorrect={false} autoCapitalize='none' placeholder="Name" value={name} onChangeText={setName}/>
+      {state.errorMessage?<Text style={styles.errorMessage}>{state.errorMessage}</Text>:null}
       </Spacer>
+      
       <Button 
       title="Signup"
-      onPress={() => {signup({email, password})}}
+      onPress={() => {signup({email, password, name})}}
       />
       <Button 
       title="Go to Signin"
@@ -32,6 +34,11 @@ const SignupScreen = ({navigation}) => {
       title="Go to MainFlow"
       onPress={() => {navigation.navigate('mainFlow')}}
       />
+      <Spacer>
+      <TouchableOpacity onPress={()=> navigation.navigate('Signin')}>
+      <Text style={styles.link}>Already have an account? Signin instead!</Text>
+      </TouchableOpacity>
+      </Spacer>
     </View>
   )
 }
@@ -53,5 +60,15 @@ mainView:{
   alignContent:'center', 
   flex:1,
   marginHorizontal:20,
+},
+errorMessage:{
+  color:'red',
+  fontSize:16,
+  marginLeft:15,
+  marginTop:15,
+},
+link:{
+  color:'blue',
+
 }
 })

@@ -1,44 +1,17 @@
 import { StyleSheet, View, TouchableOpacity} from 'react-native'
-import React, {useState, useContext} from 'react'
-import {Text, Input, Button} from '@rneui/base'
-import Spacer from '../components/Spacer'
+import React, { useContext} from 'react'
 import { Context as AuthContext } from '../context/AuthContext'
+import Authform from '../components/Authform'
+import Navlink from '../components/Navlink'
+
 
 const SignupScreen = ({navigation}) => {
   const {state, signup} = useContext(AuthContext)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
 
   return (
     <View style={styles.mainView}>
-    <Spacer>
-      <Text h3>SignupScreen</Text>
-     </Spacer>
-      <Spacer>
-      <Input autoCorrect={false} autoCapitalize='none' placeholder="Email" value={email} onChangeText={setEmail} />
-      <Input secureTextEntry autoCorrect={false} autoCapitalize='none' placeholder="Password" value={password} onChangeText={setPassword}/>
-      <Input secureTextEntry autoCorrect={false} autoCapitalize='none' placeholder="Name" value={name} onChangeText={setName}/>
-      {state.errorMessage?<Text style={styles.errorMessage}>{state.errorMessage}</Text>:null}
-      </Spacer>
-      
-      <Button 
-      title="Signup"
-      onPress={() => {signup({email, password, name})}}
-      />
-      <Button 
-      title="Go to Signin"
-      onPress={() => {navigation.navigate('Signin')}}
-      />
-      <Button 
-      title="Go to MainFlow"
-      onPress={() => {navigation.navigate('mainFlow')}}
-      />
-      <Spacer>
-      <TouchableOpacity onPress={()=> navigation.navigate('Signin')}>
-      <Text style={styles.link}>Already have an account? Signin instead!</Text>
-      </TouchableOpacity>
-      </Spacer>
+      <Authform headerText='Signup Screen' errorMessage={state.errorMessage} onSubmit={signup} buttonText='Signup' />
+      <Navlink linkText='Already have an account? Signin instead!' routeTo='Signin' />
     </View>
   )
 }
@@ -61,12 +34,7 @@ mainView:{
   flex:1,
   marginHorizontal:20,
 },
-errorMessage:{
-  color:'red',
-  fontSize:16,
-  marginLeft:15,
-  marginTop:15,
-},
+
 link:{
   color:'blue',
 

@@ -9,10 +9,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     case "clear_error":
       return { ...state, errorMessage: "" };
-    case "signup":
-      return { ...state, errorMessage: "", token: action.payload.token, email: action.payload.email, name: action.payload.name };
     case "signin":
-      return { ...state, errorMessage: "", token: action.payload };
+      return { ...state, errorMessage: "", token: action.payload.token, email: action.payload.email, name: action.payload.name };
     case "signout":
       return { ...state, token: null };
     default:
@@ -28,10 +26,11 @@ const signup = (dispatch)=>{
       await AsyncStorage.setItem('token', response.data.token);
       //await AsyncStorage.getItem('token')
       console.log(response.data);
-      dispatch({type: "signup", payload:{token:response.data.token, name:response.data.name, email:response.data.email}});
+      dispatch({type: "signin", payload:{token:response.data.token, name:response.data.name, email:response.data.email}});
       navigate('TrackList');
     }catch(err){
       console.log(err.response.data);
+      console.log(err);
       dispatch({type: "add_error", payload: err.response.data.error});
     }
     // after signup, modify our state to indicate the user is authenticated
@@ -39,8 +38,19 @@ const signup = (dispatch)=>{
 }
 
 const signin = (dispatch)=>{
-  return ({email, password})=>{
-    dispatch({type: "signin", payload: {email, password}});
+  return async({email, password, name})=>{
+     try{
+      const response = await trackerApi.post('/signin', {email, password, name});
+      await AsyncStorage.setItem('token', response.data.token);
+      //await AsyncStorage.getItem('token')
+      console.log(response.data);
+      dispatch({type: "signin", payload:{token:response.data.token, name:response.data.name, email:response.data.email}});
+      navigate('TrackList');
+    }catch(err){
+      console.log(err.response.data);
+      dispatch({type: "add_error", payload: err.response.data.error});
+    }
+
   }}
 
 const signout = (dispatch)=>{

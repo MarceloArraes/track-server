@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity} from 'react-native'
+import { StyleSheet, View} from 'react-native'
 import React, { useContext} from 'react'
 import { Context as AuthContext } from '../context/AuthContext'
 import Authform from '../components/Authform'
@@ -35,8 +35,5 @@ mainView:{
   marginHorizontal:20,
 },
 
-link:{
-  color:'blue',
 
-}
 })

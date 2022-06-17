@@ -30,7 +30,7 @@ console.error('Error connecting to mongo', err);
 }
 ) 
 
-app.get('/', (req, res) => {
+app.get('/', requireAuth, (req, res) => {
   console.log(req.user);
   res.send(`Hello World! ${ req.user.email}`);
 });

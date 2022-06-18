@@ -1,0 +1,25 @@
+import * as Location from 'expo-location'
+
+const tenMeterWithDegrees = 0.0001;
+
+const getLocation = (increment) => {
+  return {
+    timestamp: new Date(),
+    coords: {
+      latitude: -3.7252174 - increment * tenMeterWithDegrees,
+      longitude: -38.5237544 + increment * tenMeterWithDegrees,
+      altitude: 0,
+      accuracy: 5,
+      heading: 0,
+      speed: 0,
+      altitudeAccuracy: 5,
+    },
+}
+}
+let counter = 0;
+setInterval(() => {
+  Location.EventEmitter.emit('Expo.locationChanged',{watchId: 
+  Location._getCurrentWatchId(),
+  location: getLocation(counter)})
+  counter++;
+}, 1000);

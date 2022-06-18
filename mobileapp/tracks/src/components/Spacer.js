@@ -9,10 +9,10 @@ const Spacer = ({children}) => {
   )
 }
 
-export default Spacer
-
 const styles = StyleSheet.create({
 spacer:{
   margin: 20,
 }
 })
+
+export default Spacer

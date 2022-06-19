@@ -4,7 +4,7 @@ import React,{useEffect, useState} from 'react'
 import Map from '../components/Map'
 import { SafeAreaView } from 'react-navigation'
 import {Text, Input, Button} from '@rneui/base'
-import { requestForegroundPermissionsAsync } from 'expo-location';
+import { requestForegroundPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location';
  
 
 const TrackCreateScreen = () => {
@@ -18,6 +18,11 @@ const TrackCreateScreen = () => {
   const startWatching = async () => {
     try {
       const { granted } = await requestForegroundPermissionsAsync();
+      await watchPositionAsync({
+      accuracy: Accuracy.BestForNavigation,
+      timeInterval: 1000,
+      distanceInterval: 10, 
+      }, location => {console.log(location);});
       if(granted) {setError('')}
       if (!granted) {
         throw new Error('Location permission not granted');

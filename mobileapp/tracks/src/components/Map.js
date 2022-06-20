@@ -5,7 +5,6 @@ import { Context as LocationContext } from '../context/LocationContext'
 
 const Map = () => {
   const {state:{currentLocation}} = useContext(LocationContext);
-  console.log("STATE" ,currentLocation);
 
   const initialLocation = {
     longitude: -3.7718384,

@@ -4,6 +4,14 @@ const locationReducer=(state, action)=>{
   switch(action.type){
     case 'set_current_location':
       return {...state, currentLocation:action.payload};
+    case 'start_recording':
+      return {...state, recording:true};
+    case 'stop_recording':
+      return {...state, recording:false};
+    case 'add_location':
+      return {...state, locations:[...state.locations, action.payload]};
+    case 'changeName':
+      return {...state, name:action.payload};
     default:
       return state;
   }
@@ -16,18 +24,21 @@ const stopRecording = dispatch => ()=>{
   dispatch({type:'stop_recording'});
 }
 const addLocation = dispatch => (location, recording)=>{
-  dispatch({type:'add_location', payload:{location, recording}});
+  dispatch({type:'set_current_location', payload:location});
+  if(recording){
+  dispatch({type:'add_location', payload:location});
+  }
 }
 const clearLocations = dispatch => ()=>{
   dispatch({type:'clear_locations'});
 }
-const setCurrentLocation = dispatch => (location)=>{
-  dispatch({type:'set_current_location', payload:location});
+const changeName = dispatch => (name)=>{
+  dispatch({type:'change_name', payload:name});
 }
 
 export const {Context, Provider} = createDataContext(
   locationReducer,
   {startRecording, stopRecording, addLocation, 
-  clearLocations, setCurrentLocation},
-  {location:[], recording:false, currentLocation:null}
+  clearLocations, changeName},
+  {locations:[], recording:false, currentLocation:null, name:''}
 )

@@ -6,9 +6,9 @@ const getLocation = (increment) => {
   return {
     timestamp: new Date(),
     coords: {
-      latitude: -3.7252174 - increment * tenMeterWithDegrees,
-      longitude: -38.5237544 + increment * tenMeterWithDegrees,
-      altitude: 0,
+      latitude: -3.7718384 - increment * tenMeterWithDegrees,
+      longitude: -38.4862449 + increment * tenMeterWithDegrees,
+      altitude: 48.5,
       accuracy: 5,
       heading: 0,
       speed: 0,

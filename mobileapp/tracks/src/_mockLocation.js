@@ -7,7 +7,7 @@ const getLocation = (increment) => {
     timestamp: new Date(),
     coords: {
       latitude: -3.7718384 - increment * tenMeterWithDegrees,
-      longitude: -38.4862449 + increment * tenMeterWithDegrees,
+      longitude: -38.4862449 + increment * tenMeterWithDegrees ,
       altitude: 48.5,
       accuracy: 5,
       heading: 0,
@@ -18,7 +18,7 @@ const getLocation = (increment) => {
 }
 let counter = 0;
 setInterval(() => {
-  Location.EventEmitter.emit('Expo.locationChanged',{watchId: 
+  Location.EventEmitter.emit('Expo.locationChanged',{watchId:
   Location._getCurrentWatchId(),
   location: getLocation(counter)})
   counter++;

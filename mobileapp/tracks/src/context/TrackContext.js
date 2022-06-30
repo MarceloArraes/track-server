@@ -1,0 +1,37 @@
+import createDataContext from "./createDataContext";
+
+const trackReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TRACK":
+      return {
+        ...state,
+        tracks: [...state.tracks, action.payload],
+      };
+    default:
+      return state;
+  }
+}
+
+const fetchTracks = async (dispatch) => {
+/*   const response = await fetch("http://localhost:8080/api/tracks");
+  const json = await response.json();
+  dispatch({ type: "ADD_TRACKS", payload: json }); */
+}
+const createTrack = dispatch => (name, locations) => {
+  console.log("createTrack");
+/*   const response = await fetch("http://localhost:8080/api/tracks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title }),
+  });
+  const json = await response.json();
+  dispatch({ type: "ADD_TRACK", payload: json }); */
+};
+
+export const { Provider, Context } = createDataContext(
+  trackReducer,
+  { fetchTracks, createTrack },
+  { tracks: [] }
+);

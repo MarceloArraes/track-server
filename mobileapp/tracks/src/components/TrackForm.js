@@ -30,7 +30,7 @@ const TrackForm = () => {
       }
       </Spacer>
       {!recording && locations.length ?(<Spacer>
-        <Button title='Save' onPress={saveTrack} /></Spacer>
+        <Button title='Save' onPress={()=>saveTrack()} /></Spacer>
       ) : null}
     </View>
   )

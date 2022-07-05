@@ -17,9 +17,15 @@ app.use(trackRoutes);
 
 const mongoUri = process.env.MONGOURI
 
+if (!mongoUri) {
+  throw new Error(
+    `MongoURI was not supplied.  Make sure you watch the video on setting up Mongo DB!`
+  );
+}
+
 mongoose.connect(mongoUri, {
 useNewUrlParser: true,
-
+  useUnifiedTopology: true,
 });
 mongoose.connection.on('connected', () => {
 console.log('Connected to mongo instance');
@@ -28,7 +34,7 @@ mongoose.connection.on('error', (err) => {
 console.log('Error connecting to mongo', err);
 console.error('Error connecting to mongo', err);
 }
-) 
+)
 
 app.get('/', requireAuth, (req, res) => {
   console.log(req.user);

@@ -17,7 +17,7 @@ router.get('/tracks', async (req, res) =>{
 
 router.post('/tracks', async (req, res)=>{
   const {name, locations} = req.body;
-
+    console.log("ENTERED TRACK ROUTE POST", req.body);
   if (!name || !locations){
     return res
       .status(422)

@@ -6,12 +6,15 @@ import { navigate } from "../navigationRef";
 
 export default () => {
   const { createTrack } = useContext(TrackContext);
-  const { state: { locations, name }, reset } = useContext(LocationContext);
+  const {
+    state: { locations, name },
+    reset
+  } = useContext(LocationContext);
 
   const saveTrack = async () => {
     await createTrack(name, locations);
     reset();
-      navigate('TrackList');
+    navigate('TrackList');
   }
   return [saveTrack];
 };

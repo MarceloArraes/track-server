@@ -18,7 +18,7 @@ const TrackCreateScreen = ({isFocused}) => {
     <SafeAreaView forceInset={{top:'always'}}>
       <Text style={styles.text}>Track Create</Text>
       <Map/>
-      <Text style={styles.textError}>{error}</Text>
+     {error? <Text style={styles.textError}>{error}</Text>:null}
       <TrackForm/>
     </SafeAreaView>
   )

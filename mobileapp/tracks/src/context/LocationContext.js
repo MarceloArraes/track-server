@@ -34,16 +34,12 @@ const addLocation = dispatch => (location, recording) => {
     dispatch({ type: 'add_location', payload: location });
   }
 };
-const clearLocations = dispatch => ()=>{
-  dispatch({type:'clear_locations'});
-}
 const reset = dispatch => () => {
   dispatch({ type: 'reset' });
 };
 
 export const {Context, Provider} = createDataContext(
   locationReducer,
-  {startRecording, stopRecording, addLocation,
-  clearLocations, changeName, reset},
-  {locations:[], recording:false, currentLocation:null, name:''}
+  {startRecording, stopRecording, addLocation, changeName, reset},
+  {name: '', recording: false, locations: [], currentLocation: null}
 )

@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get('/tracks', async (req, res) =>{
-  const tracks = await Track.findOne({userId: req.user._id});
+  const tracks = await Track.find({userId: req.user._id});
   console.log('req.user', req.user);
   console.log('tracks', tracks);
   res.send(tracks);
@@ -18,7 +18,12 @@ router.get('/tracks', async (req, res) =>{
 router.post('/tracks', async (req, res)=>{
   const {name, locations} = req.body;
 
-  if(!name || !locations) return res.status(422).send({error: 'You must provide a name and locations'});
+  if (!name || !locations){
+    return res
+      .status(422)
+      .send({ error: 'You must provide a name and locations' });
+  }
+
   try{
     const track = new Track({name, locations, userId: req.user._id});
     await track.save();

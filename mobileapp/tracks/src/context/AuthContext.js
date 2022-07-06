@@ -10,7 +10,7 @@ const authReducer = (state, action) => {
     case "clear_error":
       return { ...state, errorMessage: "" };
     case "signin":
-      return { ...state, errorMessage: "", token: action.payload.token, email: action.payload.email, name: action.payload.name };
+      return { ...state, errorMessage: "", token: action.payload };
     case "signout":
       return { ...state, token: null, errorMessage: "" };
     default:
@@ -20,7 +20,7 @@ const authReducer = (state, action) => {
 const tryLocalSignin = dispatch => async ()=>{
   const token = await AsyncStorage.getItem('token')
     if(token){
-      dispatch({type:"signin", payload:{token, name:'name', email:'email'}});
+      dispatch({type:"signin", payload:token});
       navigate("TrackList");
     }else{
       navigate("Signup");
@@ -42,7 +42,7 @@ const signup = (dispatch)=>{
       await AsyncStorage.setItem('token', response.data.token);
       //await AsyncStorage.getItem('token')
       console.log(response.data);
-      dispatch({type: "signin", payload:{token:response.data.token, name:response.data.name, email:response.data.email}});
+      dispatch({type: "signin", payload:  response.data.token });
       navigate('TrackList');
     }catch(err){
       console.log(err.response.data);
@@ -60,7 +60,7 @@ const signin = (dispatch)=>{
       await AsyncStorage.setItem('token', response.data.token);
       //await AsyncStorage.getItem('token')
       console.log(response.data);
-      dispatch({type: "signin", payload:{token:response.data.token, name:response.data.name, email:response.data.email}});
+      dispatch({type: "signin", payload:  response.data.token});
       navigate('TrackList');
     }catch(err){
       console.log(err.response.data);
@@ -71,8 +71,8 @@ const signin = (dispatch)=>{
 
 const signout = (dispatch)=>{
   return async()=>{
-    dispatch({type: "signout"});
     await AsyncStorage.removeItem('token');
+    dispatch({type: "signout"});
     navigate('loginFlow')
   }
 }

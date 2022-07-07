@@ -22,7 +22,7 @@ name:{
   type: String,
   default:'',
 },
-locations:[pointSchema],
+locations:[pointSchema]
 });
 
 mongoose.model('Track', trackSchema);

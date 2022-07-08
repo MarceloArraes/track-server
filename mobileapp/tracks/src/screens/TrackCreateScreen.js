@@ -1,4 +1,4 @@
-//import '../_mockLocation';
+import '../_mockLocation';
 import { StyleSheet } from 'react-native'
 import React,{ useContext, useCallback} from 'react'
 import Map from '../components/Map'

@@ -23,10 +23,7 @@ if (!mongoUri) {
   );
 }
 
-mongoose.connect(mongoUri, {
-useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(mongoUri);
 mongoose.connection.on('connected', () => {
 console.log('Connected to mongo instance');
 })

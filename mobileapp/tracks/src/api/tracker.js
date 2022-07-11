@@ -2,7 +2,6 @@ import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const instance = axios.create({
-  //baseURL: "http://192.168.15.33:3000/tracks"
   baseURL: "https://puce-lively-elk.cyclic.app/"
  })
 

@@ -14,13 +14,14 @@ const getLocation = (increment) => {
       speed: 0,
       altitudeAccuracy: 5,
     },
+  }
 }
-}
+
 let counter = 0;
 setInterval(() => {
-  Location.EventEmitter.emit('Expo.locationChanged',
-    {
-  watchId: Location._getCurrentWatchId(),
-  location: getLocation(counter)})
+  Location.EventEmitter.emit('Expo.locationChanged', {
+    watchId: Location._getCurrentWatchId(),
+    location: getLocation(counter)
+  });
   counter++;
 }, 1000);

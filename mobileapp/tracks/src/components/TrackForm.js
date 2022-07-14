@@ -14,7 +14,7 @@ const TrackForm = () => {
 } = useContext(LocationContext);
   const [saveTrack] = useSaveTrack();
 
-  console.log("length of locations: ", locations.length);
+  console.log("of locations: ", locations.length);
 
   return (
     <View>

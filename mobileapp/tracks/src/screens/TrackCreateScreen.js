@@ -7,6 +7,7 @@ import {Text} from '@rneui/base'
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../Hooks/useLocation';
 import TrackForm from '../components/TrackForm';
+import {FontAwesome} from '@expo/vector-icons';
 
 const TrackCreateScreen = ({isFocused}) => {
   const { state:{recording}, addLocation } = useContext(LocationContext);
@@ -24,11 +25,26 @@ const TrackCreateScreen = ({isFocused}) => {
   )
 }
 
+TrackCreateScreen.navigationOptions = {
+  title: 'Add Track',
+  tabBarIcon: <FontAwesome name="plus" size={24}/>
+
+}
+
 export default withNavigationFocus(TrackCreateScreen)
 
 const styles = StyleSheet.create({
 text:{
-  fontSize: 36,
+    fontSize: 36,
+    textAlign: 'center',
+    marginVertical: 10,
+    marginHorizontal: 10,
+    color: '#fff',
+    backgroundColor: 'grey',
+    padding: 5,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginTop: 55,
 },
 textError:{
   fontSize: 24,

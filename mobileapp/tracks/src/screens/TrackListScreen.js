@@ -17,7 +17,6 @@ const TrackListScreen = ({ navigation }) => {
   return (
     <View>
     <NavigationEvents onWillFocus={fetchTracks}/>
-      <Text style={styles.text}>TrackListScreen</Text>
       <Button
       title="Go to TrackDetail"
         onPress={() => navigation.navigate('TrackDetail')} />
@@ -39,6 +38,10 @@ const TrackListScreen = ({ navigation }) => {
       />
     </View>
   )
+}
+
+TrackListScreen.navigationOptions = {
+  title: 'Track List'
 }
 
 export default TrackListScreen

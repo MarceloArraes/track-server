@@ -15,7 +15,6 @@ const Map = () => {
 
   return (
     <View>
-      <Text>Im a Map</Text>
       <MapView style={styles.map}
       initialRegion={{
       ...initialLocation,
